@@ -22,7 +22,7 @@ export function ClassSlice() {
     <div style={{ gridArea: "class" }}>
       <h2>Class</h2>
       {Object.entries(CLASS_LIST).map(([cls, attrReq]) => (
-        <details>
+        <details key={cls}>
           <summary
             style={{
               color: classSatisfied(values, attrReq) ? "#7BA23F" : "#CB1B45",
@@ -33,7 +33,7 @@ export function ClassSlice() {
 
           <ul>
             {Object.entries(attrReq).map(([attr, req]) => (
-              <li>
+              <li key={`${cls}-${attr}`}>
                 {attr}: {req},{" "}
                 <span
                   style={{

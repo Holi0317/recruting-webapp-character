@@ -15,7 +15,7 @@ export function AttributeSlice() {
     <div style={{ gridArea: "attribute" }}>
       <h2>Attributes</h2>
       {Object.entries(values).map(([attr, val]) => (
-        <div>
+        <div key={attr}>
           {attr}: {val} (Modifier: {modifiers[attr]}){" "}
           <PlusMinus
             onPlus={() => update(attr as AttributeType, 1)}

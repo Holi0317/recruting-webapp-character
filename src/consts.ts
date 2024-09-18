@@ -38,7 +38,12 @@ export const CLASS_LIST: Record<string, Record<AttributeType, number>> = {
   },
 };
 
-export const SKILL_LIST = [
+export interface SkillDefinition {
+  name: string;
+  attributeModifier: AttributeType;
+}
+
+export const SKILL_LIST: SkillDefinition[] = [
   { name: "Acrobatics", attributeModifier: "Dexterity" },
   { name: "Animal Handling", attributeModifier: "Wisdom" },
   { name: "Arcana", attributeModifier: "Intelligence" },
@@ -58,3 +63,7 @@ export const SKILL_LIST = [
   { name: "Stealth", attributeModifier: "Dexterity" },
   { name: "Survival", attributeModifier: "Wisdom" },
 ];
+
+export const SKILL_MODIFIER_MAP = new Map(
+  SKILL_LIST.map((skill) => [skill.name, skill.attributeModifier]),
+);

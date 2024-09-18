@@ -7,16 +7,16 @@ import { AttributeType } from "../../consts.ts";
 export function AttributeSlice() {
   const store = useContext(CharacterContext);
   if (!store) throw new Error("Missing CharacterContext.Provider in the tree");
+  const values = useStore(store, (s) => s.attributeValue);
   const modifiers = useStore(store, (s) => s.attributeModifier);
-  const strength = useStore(store, (s) => s.attributeStrength);
-  const update = useStore(store, (s) => s.updateAttributeModifier);
+  const update = useStore(store, (s) => s.updateAttributeValue);
 
   return (
     <div>
       <h2>Attributes</h2>
-      {Object.entries(modifiers).map(([attr, mod]) => (
+      {Object.entries(values).map(([attr, val]) => (
         <div>
-          {attr}: {strength[attr]} (Modifier: {mod}){" "}
+          {attr}: {val} (Modifier: {modifiers[attr]}){" "}
           <PlusMinus
             onPlus={() => update(attr as AttributeType, 1)}
             onMinus={() => update(attr as AttributeType, -1)}

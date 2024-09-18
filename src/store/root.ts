@@ -3,21 +3,20 @@ import { createComputed } from "zustand-computed";
 import { AttributeType } from "../consts";
 
 interface CharacterState {
-  attributeModifier: Record<AttributeType, number>;
-  updateAttributeModifier: (attr: AttributeType, diff: 1 | -1) => void;
+  attributeValue: Record<AttributeType, number>;
+  updateAttributeValue: (attr: AttributeType, diff: 1 | -1) => void;
 }
 
 interface CharacterComputed {
-  attributeStrength: Record<AttributeType, number>;
+  attributeModifier: Record<AttributeType, number>;
 }
 
 const computed = createComputed(
   (state: CharacterState): CharacterComputed => ({
-    attributeStrength: Object.fromEntries(
-      // FIXME: The algo is wrong
-      Object.entries(state.attributeModifier).map(([attr, mod]) => [
+    attributeModifier: Object.fromEntries(
+      Object.entries(state.attributeValue).map(([attr, val]) => [
         attr,
-        mod + 10,
+        Math.floor((val - 10) / 2),
       ]),
     ) as Record<AttributeType, number>,
   }),
@@ -26,20 +25,20 @@ const computed = createComputed(
 export function createCharacterStore() {
   return create<CharacterState>()(
     computed((set) => ({
-      attributeModifier: {
-        Strength: 0,
-        Dexterity: 0,
-        Constitution: 0,
-        Intelligence: 0,
-        Wisdom: 0,
-        Charisma: 0,
+      attributeValue: {
+        Strength: 10,
+        Dexterity: 10,
+        Constitution: 10,
+        Intelligence: 10,
+        Wisdom: 10,
+        Charisma: 10,
       },
 
-      updateAttributeModifier: (attr, diff) =>
+      updateAttributeValue: (attr, diff) =>
         set((state) => ({
-          attributeModifier: {
-            ...state.attributeModifier,
-            [attr]: state.attributeModifier[attr] + diff,
+          attributeValue: {
+            ...state.attributeValue,
+            [attr]: state.attributeValue[attr] + diff,
           },
         })),
     })),

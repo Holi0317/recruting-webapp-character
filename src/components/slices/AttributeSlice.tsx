@@ -12,7 +12,7 @@ export function AttributeSlice() {
   const update = useStore(store, (s) => s.updateAttributeValue);
 
   return (
-    <div>
+    <div style={{ gridArea: "attribute" }}>
       <h2>Attributes</h2>
       {Object.entries(values).map(([attr, val]) => (
         <div>

@@ -11,7 +11,7 @@ export const ATTRIBUTE_LIST = [
 
 export type AttributeType = List.UnionOf<typeof ATTRIBUTE_LIST>;
 
-export const CLASS_LIST = {
+export const CLASS_LIST: Record<string, Record<AttributeType, number>> = {
   Barbarian: {
     Strength: 14,
     Dexterity: 9,

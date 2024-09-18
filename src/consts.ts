@@ -1,3 +1,5 @@
+import type { List } from "ts-toolbelt";
+
 export const ATTRIBUTE_LIST = [
   "Strength",
   "Dexterity",
@@ -5,7 +7,9 @@ export const ATTRIBUTE_LIST = [
   "Intelligence",
   "Wisdom",
   "Charisma",
-];
+] as const;
+
+export type AttributeType = List.UnionOf<typeof ATTRIBUTE_LIST>;
 
 export const CLASS_LIST = {
   Barbarian: {
